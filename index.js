@@ -1,8 +1,11 @@
 const express = require('express')
+var morgan = require('morgan')
 const app = express()
 const port = 3000
 
-app.get('/trang-chu', (req, res) => {
+app.use(morgan('combined'))
+
+app.get('/tintuc', (req, res) => {
   res.send('Hello World!')
 })
 
