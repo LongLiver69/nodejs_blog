@@ -1,6 +1,15 @@
+const { mutipleMongooseToObject } = require('../../until/mongoose');
+const Account = require('../models/Account');
+
 class SiteController {
-    home(req, res) {
-        res.render('home');
+
+    home(req, res, next) {
+        Account.find({})
+            .then(accounts => res.render('home', {
+                accounts: mutipleMongooseToObject(accounts)
+            }))
+            .catch(next);
+
     }
 
     search(req, res) {
