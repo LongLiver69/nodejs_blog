@@ -10,6 +10,18 @@ class CourseController{
             })
             .catch(next);
     }
+
+    create(req, res, next) {
+        res.render('courses/create')
+    }
+
+    store(req, res, next) {
+        const account = new Account(req.body);
+        account.save()
+            .then(() => res.redirect('/'))
+            .catch(err => {}); 
+    }
+
 }
 
 
