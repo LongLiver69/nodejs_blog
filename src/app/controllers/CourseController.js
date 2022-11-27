@@ -22,6 +22,21 @@ class CourseController{
             .catch(err => {}); 
     }
 
+    edit(req, res, next) {
+        Account.findById(req.params.id)
+            .then(account => res.render('courses/edit', {
+                account: mongooseToObject(account)
+            }))
+            .catch(next)
+    }
+
+    // [PUT] /courses/:id
+    update(req, res, next) {
+        Account.updateOne({_id: req.params.id}, req.body)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
+    }
+
 }
 
 

@@ -10,7 +10,6 @@ const Account = new Schema({
   age: {type: String, maxLength: 255},
   mssv: {type: String, maxLength: 255},
   image: {type: String},
-  slug: {type: String},
   videoId: {type: String, require:true, },
   slug: { type: String, slug: 'name', unique: true },
 });
