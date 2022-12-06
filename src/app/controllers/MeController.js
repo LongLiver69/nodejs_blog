@@ -4,12 +4,24 @@ const Account = require('../models/Account');
 class MeController{
 
     storedCourses(req, res, next) {
-        Account.find({})
-            .then(accounts => res.render('me/stored-courses', {
+
+        Promise.all([Account.find({}), Account.countDocumentsDeleted()])
+        .then(([accounts, deletedCount]) => 
+            res.render('me/stored-courses', {
+                deletedCount,
+                accounts: mutipleMongooseToObject(accounts)
+            })
+        )
+        .catch(next);
+
+    }
+
+    trashCourses(req, res, next) {
+        Account.findDeleted({})
+            .then(accounts => res.render('me/trash-courses', {
                 accounts: mutipleMongooseToObject(accounts)
             }))
             .catch(next);
-
     }
 
 

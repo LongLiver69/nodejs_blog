@@ -37,6 +37,37 @@ class CourseController{
             .catch(next);
     }
 
+    // [DELETE] /courses/:id
+    delete(req, res, next) {
+        Account.delete({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    destroy(req, res, next) {
+        Account.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    restore(req, res, next) {
+        Account.restore({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    handleFormAction(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Account.delete({_id: {$in: req.body.courseIds}})
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({msg: 'Action is invalid!'});
+        }
+    }
+
 }
 
 

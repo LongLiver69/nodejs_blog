@@ -5,3 +5,7 @@ h1 {
 h2 {
   color: blue;
   font-size: 20; }
+
+.select-checkbox {
+  width: 180px;
+  margin: 0 30px; }
